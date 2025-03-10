@@ -17,9 +17,9 @@
 	"files": ["dist", "templates"],
 	"workspaces": ["templates/*"],
 	"dependencies": {
-		"@inquirer/prompts": "^7.3.2",
+		"@inquirer/prompts": "^7.3.3",
 		"clipboardy": "^4.0.0",
-		"esbuild": "^0.25.0",
+		"esbuild": "^0.25.1",
 		"glob": "^11.0.1",
 		"jiti": "^2.4.2",
 		"typescript": "^5.8.2",
@@ -34,6 +34,6 @@
 		"eslint": "9.22.0",
 		"tsup": "8.4.0",
 		"type-fest": "4.37.0",
-		"vitest": "3.0.7"
+		"vitest": "3.0.8"
 	}
 }
