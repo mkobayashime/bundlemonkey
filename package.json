@@ -16,12 +16,12 @@
 	},
 	"files": ["dist", "templates"],
 	"dependencies": {
-		"@inquirer/prompts": "^7.4.0",
+		"@inquirer/prompts": "^7.4.1",
 		"clipboardy": "^4.0.0",
-		"esbuild": "^0.25.1",
+		"esbuild": "^0.25.2",
 		"glob": "^11.0.1",
 		"jiti": "^2.4.2",
-		"typescript": "^5.8.2",
+		"typescript": "^5.8.3",
 		"valibot": "^1.0.0"
 	},
 	"devDependencies": {
@@ -34,7 +34,7 @@
 		"eslint": "9.24.0",
 		"semver": "7.7.1",
 		"tsup": "8.4.0",
-		"type-fest": "4.39.0",
+		"type-fest": "4.39.1",
 		"vitest": "3.1.1"
 	}
 }
