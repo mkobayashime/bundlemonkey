@@ -16,10 +16,10 @@
 	},
 	"files": ["dist", "templates"],
 	"dependencies": {
-		"@inquirer/prompts": "^7.5.2",
+		"@inquirer/prompts": "^7.5.3",
 		"clipboardy": "^4.0.0",
-		"esbuild": "^0.25.4",
-		"glob": "^11.0.2",
+		"esbuild": "^0.25.5",
+		"glob": "^11.0.3",
 		"jiti": "^2.4.2",
 		"typescript": "^5.8.3",
 		"valibot": "^1.1.0"
@@ -27,7 +27,7 @@
 	"devDependencies": {
 		"@biomejs/biome": "1.9.4",
 		"@mkobayashime/shared-config": "1.1.1",
-		"@tsconfig/bun": "1.0.7",
+		"@tsconfig/bun": "1.0.8",
 		"@tsconfig/strictest": "2.0.5",
 		"@types/bun": "latest",
 		"@types/semver": "7.7.0",
@@ -35,6 +35,6 @@
 		"semver": "7.7.2",
 		"tsup": "8.5.0",
 		"type-fest": "4.41.0",
-		"vitest": "3.2.1"
+		"vitest": "3.2.4"
 	}
 }
