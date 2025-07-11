@@ -27,3 +27,30 @@ describe("E2E", async () => {
 		});
 	}
 });
+
+describe("E2E with sources.glob", async () => {
+	const originalConsoleLog = globalThis.console.log;
+
+	globalThis.console.log = () => {};
+
+	const outputs = await build({
+		config: {
+			sources: {
+				glob: path.resolve(import.meta.dirname, "src/*/index.user.{ts,js}"),
+			},
+			dist: {
+				production: path.resolve(import.meta.dirname, ".dist-sources"),
+			},
+		},
+	});
+
+	globalThis.console.log = originalConsoleLog;
+
+	test("should produce same outputs as legacy srcDir", () => {
+		expect(outputs.length).toBeGreaterThan(0);
+		for (const output of outputs.filter((o) => o !== undefined)) {
+			expect(output.content).toContain("// ==UserScript==");
+			expect(output.content).toContain("// ==/UserScript==");
+		}
+	});
+});
