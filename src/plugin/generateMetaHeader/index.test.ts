@@ -1,6 +1,6 @@
 import * as v from "valibot";
 import { describe, expect, it } from "vitest";
-import type { Config, ParsedConfig } from "../../config";
+import type { Config } from "../../config";
 import { type Meta, metaSchema } from "../../meta";
 import { generateMetaHeader } from ".";
 
@@ -168,7 +168,7 @@ describe(generateMetaHeader, () => {
 					description: "test description",
 					match: [],
 				} satisfies Meta),
-				defaultMeta: defaultMeta as ParsedConfig["defaultMeta"],
+				defaultMeta: defaultMeta,
 				scriptName: "test-script",
 			}),
 		).toMatchInlineSnapshot(`

@@ -6,13 +6,60 @@ import { glob } from "glob";
 import { type Config, loadConfig, type ParsedConfig } from "./config/index.js";
 import { type Mode, userscriptsPlugin } from "./plugin/index.js";
 
-const getEntryPoints = async (srcDir: string) =>
-	(await glob(path.resolve(srcDir, "./*/index.user.{j,t}s"))).map(
-		(filepath) => ({
-			out: `${path.basename(path.dirname(filepath))}.user`,
+const defaultScriptName = (filepath: string): string => {
+	const parsed = path.parse(filepath);
+
+	// For legacy pattern: src/foo/index.user.ts -> "foo"
+	if (parsed.name === "index.user") {
+		return path.basename(path.dirname(filepath));
+	}
+
+	// For flat files: src/script.user.ts -> "script"
+	if (parsed.name.endsWith(".user")) {
+		return parsed.name.slice(0, -5); // remove .user
+	}
+
+	// Fallback: use full filename without extension
+	return parsed.name;
+};
+
+const defaultOutputName = (_filepath: string, scriptName: string): string => {
+	return `${scriptName}.user`;
+};
+
+const getEntryPoints = async (config: ParsedConfig) => {
+	// Determine glob patterns to use
+	let patterns: string[];
+
+	if (config.sources?.glob) {
+		// Use new sources.glob configuration
+		patterns = Array.isArray(config.sources.glob)
+			? config.sources.glob
+			: [config.sources.glob];
+	} else {
+		// Use legacy srcDir configuration
+		patterns = [path.resolve(config.srcDir, "./*/index.user.{j,t}s")];
+	}
+
+	// Get all matching files
+	const allFiles = await Promise.all(patterns.map((pattern) => glob(pattern)));
+	const filepaths = allFiles.flat();
+
+	// Get naming functions
+	const scriptNameFn = config.sources?.naming?.scriptName ?? defaultScriptName;
+	const outputNameFn = config.sources?.naming?.outputName ?? defaultOutputName;
+
+	return filepaths.map((filepath) => {
+		const scriptName = scriptNameFn(filepath);
+		const outputName = outputNameFn(filepath, scriptName);
+
+		return {
 			in: filepath,
-		}),
-	);
+			out: outputName,
+			scriptName, // We'll use this separately, not pass to ESBuild
+		};
+	});
+};
 
 const getCommonOptions = ({
 	entryPoint,
@@ -23,21 +70,16 @@ const getCommonOptions = ({
 	entryPoint: {
 		in: string;
 		out: string;
+		scriptName: string;
 	};
 	defaultMeta: ParsedConfig["defaultMeta"];
 	mode: Mode;
 	onBuildEnd?: (output: { path: string; content: string }) => void;
 }): esbuild.BuildOptions => {
-	const scriptName = path.basename(path.dirname(entryPoint.in));
-
-	if (!scriptName) {
-		throw new Error(
-			`Failed to get scriptName from entryPoint path: ${entryPoint.in}`,
-		);
-	}
+	const { scriptName } = entryPoint;
 
 	return {
-		entryPoints: [entryPoint],
+		entryPoints: [{ in: entryPoint.in, out: entryPoint.out }],
 		bundle: true,
 		write: false,
 		charset: "utf8",
@@ -71,7 +113,7 @@ export const build = async ({
 
 	const loadedConfig = await loadConfig(config);
 
-	const entryPoints = await getEntryPoints(loadedConfig.srcDir);
+	const entryPoints = await getEntryPoints(loadedConfig);
 
 	await mkdir(loadedConfig.dist.production, { recursive: true });
 
@@ -112,7 +154,7 @@ export const watch = async ({
 
 	const loadedConfig = await loadConfig(config);
 
-	const entryPoints = await getEntryPoints(loadedConfig.srcDir);
+	const entryPoints = await getEntryPoints(loadedConfig);
 
 	await mkdir(loadedConfig.dist.dev, { recursive: true });
 
