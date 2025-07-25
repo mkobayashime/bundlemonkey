@@ -34,7 +34,7 @@
 		"@tsconfig/strictest": "2.0.5",
 		"@types/bun": "latest",
 		"@types/semver": "7.7.0",
-		"eslint": "9.31.0",
+		"eslint": "9.32.0",
 		"semver": "7.7.2",
 		"tsup": "8.5.0",
 		"type-fest": "4.41.0",
