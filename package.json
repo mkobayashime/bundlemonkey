@@ -19,25 +19,25 @@
 		"templates"
 	],
 	"dependencies": {
-		"@inquirer/prompts": "^7.8.0",
+		"@inquirer/prompts": "^7.8.4",
 		"clipboardy": "^4.0.0",
-		"esbuild": "^0.25.4",
-		"glob": "^11.0.2",
+		"esbuild": "^0.25.9",
+		"glob": "^11.0.3",
 		"jiti": "^2.5.1",
 		"typescript": "^5.9.2",
 		"valibot": "^1.1.0"
 	},
 	"devDependencies": {
-		"@biomejs/biome": "2.2.2",
+		"@biomejs/biome": "2.2.3",
 		"@mkobayashime/shared-config": "2.0.0",
-		"@tsconfig/bun": "1.0.7",
+		"@tsconfig/bun": "1.0.8",
 		"@tsconfig/strictest": "2.0.5",
 		"@types/bun": "latest",
-		"@types/semver": "7.7.0",
+		"@types/semver": "7.7.1",
 		"eslint": "9.35.0",
 		"semver": "7.7.2",
 		"tsup": "8.5.0",
 		"type-fest": "4.41.0",
-		"vitest": "3.2.1"
+		"vitest": "3.2.4"
 	}
 }
