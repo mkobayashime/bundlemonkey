@@ -22,7 +22,7 @@
 		"@inquirer/prompts": "^8.0.2",
 		"clipboardy": "^5.0.0",
 		"esbuild": "^0.26.0",
-		"glob": "^11.0.2",
+		"glob": "^13.0.0",
 		"jiti": "^2.6.1",
 		"typescript": "^5.9.2",
 		"valibot": "^1.1.0"
