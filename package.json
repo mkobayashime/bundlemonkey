@@ -20,24 +20,24 @@
 	],
 	"dependencies": {
 		"@inquirer/prompts": "^8.1.0",
-		"clipboardy": "^5.0.0",
+		"clipboardy": "^5.0.2",
 		"esbuild": "^0.26.0",
 		"glob": "^11.0.2",
 		"jiti": "^2.6.1",
-		"typescript": "^5.9.2",
+		"typescript": "^5.9.3",
 		"valibot": "^1.1.0"
 	},
 	"devDependencies": {
-		"@biomejs/biome": "2.3.0",
+		"@biomejs/biome": "2.3.10",
 		"@mkobayashime/shared-config": "2.0.0",
-		"@tsconfig/bun": "1.0.7",
-		"@tsconfig/strictest": "2.0.5",
+		"@tsconfig/bun": "1.0.10",
+		"@tsconfig/strictest": "2.0.8",
 		"@types/bun": "latest",
-		"@types/semver": "7.7.0",
-		"eslint": "9.39.1",
-		"semver": "7.7.2",
-		"tsup": "8.5.0",
+		"@types/semver": "7.7.1",
+		"eslint": "9.39.2",
+		"semver": "7.7.3",
+		"tsup": "8.5.1",
 		"type-fest": "5.3.1",
-		"vitest": "3.2.1"
+		"vitest": "3.2.4"
 	}
 }
