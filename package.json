@@ -37,7 +37,7 @@
 		"eslint": "9.39.1",
 		"semver": "7.7.2",
 		"tsup": "8.5.0",
-		"type-fest": "5.3.1",
+		"type-fest": "5.4.1",
 		"vitest": "3.2.1"
 	}
 }
