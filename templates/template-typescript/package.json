@@ -11,7 +11,7 @@
 		"bundlemonkey": "^0.7.5"
 	},
 	"devDependencies": {
-		"@types/tampermonkey": "5.0.4",
-		"typescript": "5.9.2"
+		"@types/tampermonkey": "5.0.5",
+		"typescript": "5.9.3"
 	}
 }
