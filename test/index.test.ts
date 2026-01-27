@@ -3,6 +3,7 @@ import { describe, expect, test } from "vitest";
 import { build } from "../src";
 
 describe("E2E", async () => {
+	// eslint-disable-next-line @typescript-eslint/unbound-method
 	const originalConsoleLog = globalThis.console.log;
 
 	globalThis.console.log = () => {};
