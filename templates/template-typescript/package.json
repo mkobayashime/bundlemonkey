@@ -8,7 +8,7 @@
 		"watch:remote": "bundlemonkey --watch --remote"
 	},
 	"dependencies": {
-		"bundlemonkey": "^0.7.5"
+		"bundlemonkey": "^0.7.6"
 	},
 	"devDependencies": {
 		"@types/tampermonkey": "5.0.5",
