@@ -15,7 +15,7 @@
       },
       "devDependencies": {
         "@biomejs/biome": "2.3.11",
-        "@mkobayashime/shared-config": "4.0.0",
+        "@mkobayashime/shared-config": "4.1.0",
         "@tsconfig/bun": "1.0.10",
         "@tsconfig/strictest": "2.0.8",
         "@types/bun": "latest",
@@ -176,7 +176,7 @@
 
     "@jridgewell/trace-mapping": ["@jridgewell/trace-mapping@0.3.25", "", { "dependencies": { "@jridgewell/resolve-uri": "^3.1.0", "@jridgewell/sourcemap-codec": "^1.4.14" } }, "sha512-vNk6aEwybGtawWmy/PzwnGDOjCkLWSD2wqvjGGAgOAwCGWySYXfYoxt00IJkTF+8Lb57DwOb3Aa0o9CApepiYQ=="],
 
-    "@mkobayashime/shared-config": ["@mkobayashime/shared-config@4.0.0", "", { "optionalDependencies": { "@biomejs/biome": ">2.3.0", "eslint": "^9.31.0", "eslint-config-flat-gitignore": "^2.1.0", "typescript": "^5.8.3", "typescript-eslint": "^8.39.0" } }, "sha512-yLcjSwsHmBQT5NngXSByTF1sn0qxSsyWRqFoOthhzWwvaWZWXi7vMNKVKW4JVn1WElh1AZuXL0WPHryNM6OvrA=="],
+    "@mkobayashime/shared-config": ["@mkobayashime/shared-config@4.1.0", "", { "optionalDependencies": { "@biomejs/biome": ">2.3.0", "eslint": "^9.39.2 || ^10.0.0", "eslint-config-flat-gitignore": "^2.1.0", "typescript": "^5.8.3", "typescript-eslint": "^8.56.0" } }, "sha512-8RpWS985x7cF2oXYCrHh3z1l5fQk0DpcaoBp7O73mhQxt1xSP71ltBqG0NWCJ61uuJQE9hl4DcVU2P9qPAFNqg=="],
 
     "@pkgjs/parseargs": ["@pkgjs/parseargs@0.11.0", "", {}, "sha512-+1VkjdD0QBLPodGrJUeqarH8VAIvQODIbwh9XpP5Syisf7YoQgsJKPNFoqqLQlu+VQ/tVSshMR6loPMn8U+dPg=="],
 
