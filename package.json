@@ -34,7 +34,7 @@
 		"@tsconfig/strictest": "2.0.8",
 		"@types/bun": "latest",
 		"@types/semver": "7.7.1",
-		"eslint": "9.39.2",
+		"eslint": "10.0.3",
 		"eslint-config-flat-gitignore": "2.2.1",
 		"semver": "7.7.3",
 		"tsup": "8.5.1",
