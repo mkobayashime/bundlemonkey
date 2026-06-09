@@ -16,7 +16,7 @@ jobs:
       pull-requests: read
     steps:
       - name: git-issue-release
-        uses: kouki-dan/git-issue-release@v1
+        uses: kouki-dan/git-issue-release@v1.3.1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
