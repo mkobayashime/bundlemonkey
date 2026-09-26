@@ -1,5 +1,5 @@
-biome = bunx biome
-eslint = bunx eslint
+oxfmt = bunx oxfmt
+oxlint = bunx oxlint
 tsup = bunx tsup
 typecheck = bunx tsc --noEmit
 vitest = bunx vitest
@@ -12,12 +12,12 @@ else
 endif
 
 lint: deps PHONY
-	$(biome) check
-	$(eslint) .
+	$(oxlint) --type-aware
+	$(oxfmt) --check
 
 lint.fix: deps PHONY
-	$(biome) check --write
-	$(eslint) --fix .
+	$(oxlint) --fix --type-aware
+	$(oxfmt)
 
 typecheck: deps PHONY
 	$(typecheck)
