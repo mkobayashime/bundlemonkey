@@ -1,8 +1,5 @@
 {
-	"extends": [
-		"@tsconfig/strictest/tsconfig.json",
-		"@tsconfig/bun/tsconfig.json"
-	],
+	"extends": ["@tsconfig/strictest/tsconfig.json", "@tsconfig/bun/tsconfig.json"],
 	"exclude": ["dist", "test/src", "test/snapshots", "templates"],
 	"compilerOptions": {
 		"verbatimModuleSyntax": false

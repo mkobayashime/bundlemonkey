@@ -21,9 +21,7 @@ export const generateMetaHeader = ({
 				return generatedUpdateURL;
 			}
 
-			console.warn(
-				"Warning: `defaultMeta.updateURL` must return string value.",
-			);
+			console.warn("Warning: `defaultMeta.updateURL` must return string value.");
 		}
 
 		return meta.updateURL;
@@ -40,9 +38,7 @@ export const generateMetaHeader = ({
 				return generatedDownloadURL;
 			}
 
-			console.warn(
-				"Warning: `defaultMeta.downloadURL` must return string value.",
-			);
+			console.warn("Warning: `defaultMeta.downloadURL` must return string value.");
 		}
 
 		return meta.downloadURL;
@@ -78,9 +74,7 @@ export const generateMetaHeader = ({
 			tagPair("antifeature", `${type.padEnd(8)}  ${description}`),
 		),
 		...mergedMeta.require.map((v) => tagPair("require", v)),
-		...mergedMeta.resource.map(({ name, url }) =>
-			tagPair("resource", `${name}  ${url}`),
-		),
+		...mergedMeta.resource.map(({ name, url }) => tagPair("resource", `${name}  ${url}`)),
 		...mergedMeta.match.map((v) => tagPair("match", v)),
 		...mergedMeta.excludeMatch.map((v) => tagPair("exclude-match", v)),
 		...mergedMeta.include.map((v) => tagPair("include", v)),
@@ -100,18 +94,14 @@ export const generateMetaHeader = ({
 	].filter((v) => v !== undefined);
 
 	const tagNames = tags.map(([tagName]) => tagName);
-	const longestTagNameLength = Math.max(
-		...tagNames.map((tagName) => tagName.length),
-	);
+	const longestTagNameLength = Math.max(...tagNames.map((tagName) => tagName.length));
 
 	return [
 		"// ==UserScript==",
 		tags.flatMap(([key, value]) =>
 			value === undefined
 				? []
-				: [
-						`// @${key.padEnd(longestTagNameLength)}  ${value === true ? "" : value}`.trimEnd(),
-					],
+				: [`// @${key.padEnd(longestTagNameLength)}  ${value === true ? "" : value}`.trimEnd()],
 		),
 		"// ==/UserScript==",
 	]

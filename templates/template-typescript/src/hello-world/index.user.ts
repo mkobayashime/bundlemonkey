@@ -1,4 +1,5 @@
 import { defineUserScript } from "bundlemonkey";
+
 import { message } from "./message.js";
 
 export default defineUserScript({

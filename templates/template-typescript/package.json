@@ -1,7 +1,7 @@
 {
 	"name": "bundlemonkey-template-typescript",
-	"type": "module",
 	"private": true,
+	"type": "module",
 	"scripts": {
 		"build": "bundlemonkey",
 		"watch": "bundlemonkey --watch",

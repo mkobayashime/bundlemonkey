@@ -1,18 +1,18 @@
 import { mkdir } from "node:fs/promises";
 import path from "node:path";
 import { styleText } from "node:util";
+
 import * as esbuild from "esbuild";
 import { glob } from "glob";
+
 import { type Config, loadConfig, type ParsedConfig } from "./config/index.js";
 import { type Mode, userscriptsPlugin } from "./plugin/index.js";
 
 const getEntryPoints = async (srcDir: string) =>
-	(await glob(path.resolve(srcDir, "./*/index.user.{j,t}s"))).map(
-		(filepath) => ({
-			out: `${path.basename(path.dirname(filepath))}.user`,
-			in: filepath,
-		}),
-	);
+	(await glob(path.resolve(srcDir, "./*/index.user.{j,t}s"))).map((filepath) => ({
+		out: `${path.basename(path.dirname(filepath))}.user`,
+		in: filepath,
+	}));
 
 const getCommonOptions = ({
 	entryPoint,
@@ -31,9 +31,7 @@ const getCommonOptions = ({
 	const scriptName = path.basename(path.dirname(entryPoint.in));
 
 	if (!scriptName) {
-		throw new Error(
-			`Failed to get scriptName from entryPoint path: ${entryPoint.in}`,
-		);
+		throw new Error(`Failed to get scriptName from entryPoint path: ${entryPoint.in}`);
 	}
 
 	return {
@@ -96,18 +94,9 @@ export const build = async ({
 	);
 };
 
-export const watch = async ({
-	remote,
-	config,
-}: {
-	remote: boolean;
-	config?: Config;
-}) => {
+export const watch = async ({ remote, config }: { remote: boolean; config?: Config }) => {
 	console.log(
-		styleText(
-			"blue",
-			`Bundlemonkey started in ${remote ? "remote watch" : "watch"} mode\n`,
-		),
+		styleText("blue", `Bundlemonkey started in ${remote ? "remote watch" : "watch"} mode\n`),
 	);
 
 	const loadedConfig = await loadConfig(config);

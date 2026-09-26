@@ -1,18 +1,14 @@
 import { readFile } from "node:fs/promises";
+
 import ts from "typescript";
+
 import { CONFIG_VAR_NAME } from "../../constants";
 
 export const extractMain = async (filepath: string): Promise<string> => {
 	const originalSource = await readFile(filepath, "utf8");
-	const sourceFile = ts.createSourceFile(
-		filepath,
-		originalSource,
-		ts.ScriptTarget.Latest,
-	);
+	const sourceFile = ts.createSourceFile(filepath, originalSource, ts.ScriptTarget.Latest);
 
-	const findDefineUserScriptExpression = (
-		source: ts.Node,
-	): ts.CallExpression | undefined => {
+	const findDefineUserScriptExpression = (source: ts.Node): ts.CallExpression | undefined => {
 		if (ts.isExportAssignment(source)) {
 			const expr = source.expression;
 			if (
@@ -27,13 +23,10 @@ export const extractMain = async (filepath: string): Promise<string> => {
 		return ts.forEachChild(source, findDefineUserScriptExpression);
 	};
 
-	const findMainFunction = (
-		defineUserScriptArgument: ts.ObjectLiteralExpression,
-	) => {
+	const findMainFunction = (defineUserScriptArgument: ts.ObjectLiteralExpression) => {
 		for (const prop of defineUserScriptArgument.properties) {
 			const propName =
-				prop.name &&
-				(ts.isIdentifier(prop.name) || ts.isStringLiteral(prop.name))
+				prop.name && (ts.isIdentifier(prop.name) || ts.isStringLiteral(prop.name))
 					? prop.name.text
 					: undefined;
 
@@ -70,24 +63,17 @@ export const extractMain = async (filepath: string): Promise<string> => {
 				);
 
 				const tempPrinter = ts.createPrinter();
-				return tempPrinter.printNode(
-					ts.EmitHint.Expression,
-					funcExpr,
-					sourceFile,
-				);
+				return tempPrinter.printNode(ts.EmitHint.Expression, funcExpr, sourceFile);
 			}
 		}
 
 		return;
 	};
 
-	const findConfigLiteral = (
-		defineUserScriptArgument: ts.ObjectLiteralExpression,
-	) => {
+	const findConfigLiteral = (defineUserScriptArgument: ts.ObjectLiteralExpression) => {
 		for (const prop of defineUserScriptArgument.properties) {
 			const propName =
-				prop.name &&
-				(ts.isIdentifier(prop.name) || ts.isStringLiteral(prop.name))
+				prop.name && (ts.isIdentifier(prop.name) || ts.isStringLiteral(prop.name))
 					? prop.name.text
 					: undefined;
 
@@ -109,10 +95,7 @@ export const extractMain = async (filepath: string): Promise<string> => {
 
 	const defineUserScriptExpression = findDefineUserScriptExpression(sourceFile);
 	const defineUserScriptArgument = defineUserScriptExpression?.arguments[0];
-	if (
-		!defineUserScriptArgument ||
-		!ts.isObjectLiteralExpression(defineUserScriptArgument)
-	) {
+	if (!defineUserScriptArgument || !ts.isObjectLiteralExpression(defineUserScriptArgument)) {
 		throw new Error("Scripts must export defineUserScript.");
 	}
 
@@ -123,26 +106,21 @@ export const extractMain = async (filepath: string): Promise<string> => {
 
 	const configLiteral = findConfigLiteral(defineUserScriptArgument);
 
-	const statementsWithoutTheExport = sourceFile.statements.filter(
-		(statement) => {
-			if (ts.isExportAssignment(statement)) {
-				const expr = statement.expression;
-				if (
-					ts.isCallExpression(expr) &&
-					ts.isIdentifier(expr.expression) &&
-					expr.expression.text === "defineUserScript"
-				) {
-					return false;
-				}
+	const statementsWithoutTheExport = sourceFile.statements.filter((statement) => {
+		if (ts.isExportAssignment(statement)) {
+			const expr = statement.expression;
+			if (
+				ts.isCallExpression(expr) &&
+				ts.isIdentifier(expr.expression) &&
+				expr.expression.text === "defineUserScript"
+			) {
+				return false;
 			}
-			return true;
-		},
-	);
+		}
+		return true;
+	});
 
-	const updatedSourceFile = ts.factory.updateSourceFile(
-		sourceFile,
-		statementsWithoutTheExport,
-	);
+	const updatedSourceFile = ts.factory.updateSourceFile(sourceFile, statementsWithoutTheExport);
 	const printer = ts.createPrinter();
 	const codeWithoutExport = printer.printFile(updatedSourceFile);
 
@@ -150,9 +128,7 @@ export const extractMain = async (filepath: string): Promise<string> => {
 
 	return [
 		codeWithoutExport.trim(),
-		configLiteral
-			? `const ${CONFIG_VAR_NAME} = ${configLiteral.trim()}`
-			: undefined,
+		configLiteral ? `const ${CONFIG_VAR_NAME} = ${configLiteral.trim()}` : undefined,
 		iifeText,
 	]
 		.filter((s) => s)

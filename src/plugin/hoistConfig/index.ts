@@ -1,4 +1,5 @@
 import ts from "typescript";
+
 import { CONFIG_VAR_NAME } from "../../constants";
 
 export function hoistConfig(source: string): string {
@@ -14,10 +15,7 @@ export function hoistConfig(source: string): string {
 		for (const statement of sourceFile.statements) {
 			if (ts.isVariableStatement(statement)) {
 				for (const decl of statement.declarationList.declarations) {
-					if (
-						ts.isIdentifier(decl.name) &&
-						decl.name.text === CONFIG_VAR_NAME
-					) {
+					if (ts.isIdentifier(decl.name) && decl.name.text === CONFIG_VAR_NAME) {
 						return statement;
 					}
 				}
@@ -34,8 +32,7 @@ export function hoistConfig(source: string): string {
 	const hoistedEnd = hoistedStatement.getEnd();
 	const hoistedText = source.substring(hoistedStart, hoistedEnd);
 
-	const remainingText =
-		source.substring(0, hoistedStart) + source.substring(hoistedEnd + 1);
+	const remainingText = source.substring(0, hoistedStart) + source.substring(hoistedEnd + 1);
 
 	return `${hoistedText.trim()}\n\n${remainingText.trim()}`;
 }

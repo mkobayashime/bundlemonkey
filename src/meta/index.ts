@@ -77,17 +77,9 @@ const runAtSchema = v.union([
 	v.literal("context-menu"),
 ]);
 
-const sandboxSchema = v.union([
-	v.literal("raw"),
-	v.literal("JavaScript"),
-	v.literal("DOM"),
-]);
+const sandboxSchema = v.union([v.literal("raw"), v.literal("JavaScript"), v.literal("DOM")]);
 
-const injectIntoSchema = v.union([
-	v.literal("page"),
-	v.literal("content"),
-	v.literal("auto"),
-]);
+const injectIntoSchema = v.union([v.literal("page"), v.literal("content"), v.literal("auto")]);
 
 export const metaSchema = v.object({
 	name: v.pipe(

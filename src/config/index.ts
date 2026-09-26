@@ -1,7 +1,9 @@
 import path from "node:path";
+
 import { createJiti } from "jiti";
 import type { OverrideProperties } from "type-fest";
 import * as v from "valibot";
+
 import { metaSchema } from "../meta";
 
 const jiti = createJiti(import.meta.url);
@@ -55,7 +57,7 @@ export const loadConfig = async (config: Config = {}) => {
 
 		const parsed = v.parse(configSchema, { ...loaded, ...config });
 		return parsed;
-	} catch (_) {
+	} catch {
 		return v.parse(configSchema, config);
 	}
 };

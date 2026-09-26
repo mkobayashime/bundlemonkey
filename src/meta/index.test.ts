@@ -1,5 +1,6 @@
 import * as v from "valibot";
 import { describe, expect, test } from "vitest";
+
 import { metaSchema } from ".";
 
 describe("metaSchema", () => {
