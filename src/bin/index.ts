@@ -4,7 +4,9 @@ import { existsSync } from "node:fs";
 import { cp } from "node:fs/promises";
 import path from "node:path";
 import { parseArgs, styleText } from "node:util";
+
 import { input } from "@inquirer/prompts";
+
 import { build, watch } from "../main";
 
 void (async () => {
@@ -61,11 +63,7 @@ Next steps:
 		return;
 	}
 
-	const mode = values.watch
-		? values.remote
-			? "watchRemote"
-			: "watch"
-		: "production";
+	const mode = values.watch ? (values.remote ? "watchRemote" : "watch") : "production";
 
 	if (mode === "production") {
 		await build({});

@@ -1,5 +1,7 @@
 import path from "node:path";
+
 import { describe, expect, test } from "vitest";
+
 import { build } from "../src";
 
 describe("E2E", async () => {

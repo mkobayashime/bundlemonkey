@@ -13,7 +13,7 @@ Works well with [Tampermonkey](https://www.tampermonkey.net/), [Violentmonkey](h
 
 - **TypeScript Support**
 
-- **Module Bundling**  
+- **Module Bundling**
 
 - **Type-Safe Header Comments**  
   Write userscript header metadata in a type-safe and straightforward way. This not only minimizes errors but also makes your code much more maintainable.
@@ -97,6 +97,7 @@ bun add bundlemonkey
 Create a directory for your userscripts named with the slug under `src` directory. Your project structure might look like this:
 
 <!-- https://tree.nathanfriend.com/?s=(%27options!(%27fancy3~fullPath!false~trailingSlash3~rootDot3)~5(%275%27src4a727**some-module64b02**0dist7%23%20bundled%20code%20goes%20here0bundlemonkey.config6%20%23optional0package.json%27)~version!%271%27)*%20%200%5Cn2**index.user63!true47script-5source!6.ts70*%017654320* -->
+
 ```bash
 ├── src/ # configurable
 │   ├── script-a/
@@ -150,7 +151,7 @@ export default defineUserScript({
   },
   main: (config) => {
     // your main code here!
-    console.log(config.message)
+    console.log(config.message);
   },
 });
 ```
@@ -161,38 +162,38 @@ Please see docs of [Tampermonkey](https://www.tampermonkey.net/documentation.php
 
 ✅ - required
 
-name|type|default
-:---|:---|:---
-[config](#config)|`T extends any`
-[main](#main) ✅|`(config: T) => unknown`|---
-name ✅|`string`|---
-namespace|`string`|
-copyright|`string`|
-version ✅|`string`|---
-description|`string`|
-icon|`string`|
-[grant](#grant)|`Grant[] \| "none"`|`[]`
-author|`string`|
-homepage|`string`|
-[antiFeature](#antifeature)|`AntiFeature[]`|`[]`
-require|`string[]`|`[]`
-resource|`{ name: string; url: string; }[]`|`[]`
-match|`string[]`|`[]`
-excludeMatch|`string[]`|`[]`
-include|`string[]`|`[]`
-exclude|`string[]`|`[]`
-[runAt](#runat)|`RunAt`|
-runIn|`string[]`|`[]`
-sandbox|`"raw" \| "JavaScript" \| "DOM"`|
-injectInto|`"page" \| "content" \| "auto"`|
-tag|`string[]`|`[]`
-connect|`string[]`|`[]`
-noframes|`boolean`|`false`
-updateURL|`string`|
-downloadURL|`string`|
-supportURL|`string`|
-unwrap|`boolean`|`false`
-topLevelAwait|`boolean`|`false`
+| name                        | type                               | default |
+| :-------------------------- | :--------------------------------- | :------ |
+| [config](#config)           | `T extends any`                    |
+| [main](#main) ✅            | `(config: T) => unknown`           | ---     |
+| name ✅                     | `string`                           | ---     |
+| namespace                   | `string`                           |
+| copyright                   | `string`                           |
+| version ✅                  | `string`                           | ---     |
+| description                 | `string`                           |
+| icon                        | `string`                           |
+| [grant](#grant)             | `Grant[] \| "none"`                | `[]`    |
+| author                      | `string`                           |
+| homepage                    | `string`                           |
+| [antiFeature](#antifeature) | `AntiFeature[]`                    | `[]`    |
+| require                     | `string[]`                         | `[]`    |
+| resource                    | `{ name: string; url: string; }[]` | `[]`    |
+| match                       | `string[]`                         | `[]`    |
+| excludeMatch                | `string[]`                         | `[]`    |
+| include                     | `string[]`                         | `[]`    |
+| exclude                     | `string[]`                         | `[]`    |
+| [runAt](#runat)             | `RunAt`                            |
+| runIn                       | `string[]`                         | `[]`    |
+| sandbox                     | `"raw" \| "JavaScript" \| "DOM"`   |
+| injectInto                  | `"page" \| "content" \| "auto"`    |
+| tag                         | `string[]`                         | `[]`    |
+| connect                     | `string[]`                         | `[]`    |
+| noframes                    | `boolean`                          | `false` |
+| updateURL                   | `string`                           |
+| downloadURL                 | `string`                           |
+| supportURL                  | `string`                           |
+| unwrap                      | `boolean`                          | `false` |
+| topLevelAwait               | `boolean`                          | `false` |
 
 #### Config
 
@@ -210,7 +211,7 @@ export default defineUserScript({
      * Edit this to change the message
      * @type string
      */
-    message: "hello!"
+    message: "hello!",
   },
   main: (config) => {
     window.alert(config.message);
@@ -230,7 +231,7 @@ var userscriptConfig = {
    * Edit this to change the message
    * @type string
    */
-  message: "hello!"
+  message: "hello!",
 };
 
 void ((config) => {
@@ -280,12 +281,7 @@ type AntiFeature = {
 [Tampermonkey docs](https://www.tampermonkey.net/documentation.php#meta:run_at)
 
 ```typescript
-type RunAt =
-  | "document-end"
-  | "document-start"
-  | "document-body"
-  | "document-idle"
-  | "context-menu";
+type RunAt = "document-end" | "document-start" | "document-body" | "document-idle" | "context-menu";
 ```
 
 ## Build Modes
@@ -307,12 +303,12 @@ Compiled scripts will be located in [`dist.dev`](#distdev) directory.
 
 Similar to Watch mode, it monitors edits to the source scripts; however, in this mode, you do not need to paste into the editor every time you make changes.
 
-When a source script is edited, a *remote* script will be copied to the clipboard only the first time. Once you paste and save this remote script in your userscripts manager's editor, subsequent edits to the source script will be automatically reflected.
+When a source script is edited, a _remote_ script will be copied to the clipboard only the first time. Once you paste and save this remote script in your userscripts manager's editor, subsequent edits to the source script will be automatically reflected.
 
 You need to allow your userscript manager access to local files to use this mode. Please refer to [Tampermonkey's FAQ](https://www.tampermonkey.net/faq.php?locale=en#Q204) for more details.
 
 > [!TIP]
-> A *remote* script is a plain userscript that simply `@require`s  the actual userscript code.
+> A _remote_ script is a plain userscript that simply `@require`s the actual userscript code.
 
 ## CLI
 

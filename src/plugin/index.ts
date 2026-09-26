@@ -1,10 +1,12 @@
 import { writeFile } from "node:fs/promises";
 import path from "node:path";
 import { styleText } from "node:util";
+
 import clipboard from "clipboardy";
 import type * as esbuild from "esbuild";
 import { createJiti } from "jiti";
 import * as v from "valibot";
+
 import type { ParsedConfig } from "../config";
 import { metaSchema, type ParsedMeta } from "../meta";
 import { extractMain } from "./extractMain";
@@ -38,10 +40,9 @@ export const userscriptsPlugin = ({
 				try {
 					const sourceWithMainExtracted = await extractMain(args.path);
 
-					const imported = await jiti.import(
-						path.resolve(process.cwd(), args.path),
-						{ default: true },
-					);
+					const imported = await jiti.import(path.resolve(process.cwd(), args.path), {
+						default: true,
+					});
 
 					const parsedMeta = v.safeParse(metaSchema, imported);
 
@@ -79,12 +80,7 @@ export const userscriptsPlugin = ({
 					);
 
 					console.group();
-					console.error(
-						styleText(
-							"reset",
-							err instanceof Error ? err.message : String(err),
-						),
-					);
+					console.error(styleText("reset", err instanceof Error ? err.message : String(err)));
 					console.groupEnd();
 
 					return {
@@ -145,12 +141,7 @@ export const userscriptsPlugin = ({
 								});
 
 								await clipboard.write(remoteModeScript);
-								console.log(
-									styleText(
-										"green",
-										`Copied remote mode script for ${scriptName}\n`,
-									),
-								);
+								console.log(styleText("green", `Copied remote mode script for ${scriptName}\n`));
 
 								remoteModeScriptBundleFinished = true;
 							}

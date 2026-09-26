@@ -1,8 +1,9 @@
 import * as v from "valibot";
 import { describe, expect, it } from "vitest";
+
+import { generateMetaHeader } from ".";
 import type { Config, ParsedConfig } from "../../config";
 import { type Meta, metaSchema } from "../../meta";
-import { generateMetaHeader } from ".";
 
 describe(generateMetaHeader, () => {
 	it("generates meta header comment", () => {
@@ -81,14 +82,8 @@ describe(generateMetaHeader, () => {
 						"https://example.com/exclude-match/*",
 						"https://foobar.example.com/exclude-match/*",
 					],
-					include: [
-						"https://example.com/include/*",
-						"https://foobar.example.com/include/*",
-					],
-					exclude: [
-						"https://example.com/exclude/*",
-						"https://foobar.example.com/exclude/*",
-					],
+					include: ["https://example.com/include/*", "https://foobar.example.com/include/*"],
+					exclude: ["https://example.com/exclude/*", "https://foobar.example.com/exclude/*"],
 					runAt: "document-end",
 					runIn: ["normal-tabs", "container-id-2"],
 					sandbox: "JavaScript",

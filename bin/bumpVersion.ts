@@ -1,5 +1,6 @@
 import { writeFile } from "node:fs/promises";
 import path from "node:path";
+
 import { select } from "@inquirer/prompts";
 import { $ } from "bun";
 import { glob } from "glob";

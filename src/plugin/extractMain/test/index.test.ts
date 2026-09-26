@@ -1,5 +1,7 @@
 import path from "node:path";
+
 import { describe, expect, it } from "vitest";
+
 import { extractMain } from "../";
 
 describe(extractMain, () => {
@@ -37,9 +39,7 @@ describe(extractMain, () => {
 	});
 
 	it("extracts async `main` function as well", async () => {
-		const output = await extractMain(
-			path.resolve(import.meta.dirname, "./scripts/asyncMain.ts"),
-		);
+		const output = await extractMain(path.resolve(import.meta.dirname, "./scripts/asyncMain.ts"));
 
 		expect(output).toMatchInlineSnapshot(`
 			"import { defineUserScript } from "../../../..";
@@ -66,9 +66,7 @@ describe(extractMain, () => {
 	});
 
 	it("extracts `main` in method definition as well", async () => {
-		const output = await extractMain(
-			path.resolve(import.meta.dirname, "./scripts/methodMain.ts"),
-		);
+		const output = await extractMain(path.resolve(import.meta.dirname, "./scripts/methodMain.ts"));
 
 		expect(output).toMatchInlineSnapshot(`
 			"import { defineUserScript } from "../../../..";
@@ -81,9 +79,7 @@ describe(extractMain, () => {
 	});
 
 	it("works for `*.js` files as well", async () => {
-		const output = await extractMain(
-			path.resolve(import.meta.dirname, "./scripts/inJS.js"),
-		);
+		const output = await extractMain(path.resolve(import.meta.dirname, "./scripts/inJS.js"));
 
 		expect(output).toMatchInlineSnapshot(`
 			"import { defineUserScript } from "../../../..";
